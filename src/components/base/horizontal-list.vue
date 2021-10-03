@@ -1,9 +1,17 @@
 <template>
   <div class="horizontal-list">
     <van-tabs type="none">
-      <van-tab v-for="item in list" :key="item.id">
+      <van-tab v-for="icon in icons" :key="icon.id">
         <template #title>
-          <slot></slot>
+          <div class="icon-size">
+            <van-image
+              width="0.8rem"
+              height="0.8rem"
+              fit="contain"
+              :src="icon.iconUrl"
+            />
+          </div>
+          <label class="icon-txt">{{ icon.name }}</label>
         </template>
       </van-tab>
     </van-tabs>
@@ -12,11 +20,23 @@
 
 <script>
 export default {
+  created() {
+    this.$api.homepageDragonBallFn().then(
+      res => {
+        if (res.data.code == 200) {
+          console.log(res.data.data);
+          this.icons = res.data.data;
+        }
+      },
+      err => {
+        console.log(res.data);
+      }
+    );
+  },
   data() {
     return { icons: [] };
   },
-  props:['list']
-
+  // props: ["list"]
 };
 </script>
 
