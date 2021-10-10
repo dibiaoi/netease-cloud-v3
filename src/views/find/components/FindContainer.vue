@@ -1,20 +1,20 @@
 <template>
   <div>
     <Swiper></Swiper>
-    <HorizontalList></HorizontalList>
+    <Icons></Icons>
   </div>
 </template>
 
 <script>
 import swiper from "@/components/base/swiper.vue";
-import HorizontalList from "@/components/base/horizontal-list.vue";
+import Icons from "@/components/base/icons.vue";
 export default {
   data() {
     return {};
   },
   components: {
     Swiper: swiper,
-    HorizontalList
+    Icons
   }
 };
 </script>

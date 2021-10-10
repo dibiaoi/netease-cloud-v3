@@ -33,7 +33,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// @import url("~styles/global.scss");
+@import "~@/assets/styles/global.scss";
+// @import "~@/assets/styles/reset";
 .custom-indicator {
   position: absolute;
   right: 5px;

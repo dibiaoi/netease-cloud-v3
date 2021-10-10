@@ -1,17 +1,19 @@
 <template>
-  <div class="horizontal-list">
+  <div class="icons">
     <van-tabs type="none">
       <van-tab v-for="icon in icons" :key="icon.id">
         <template #title>
-          <div class="icon-size">
-            <van-image
-              width="0.8rem"
-              height="0.8rem"
-              fit="contain"
-              :src="icon.iconUrl"
-            />
+          <div class="icon">
+            <div class="icon-size">
+              <van-image
+                width="0.8rem"
+                height="0.8rem"
+                fit="contain"
+                :src="icon.iconUrl"
+              />
+            </div>
+            <label class="icon-txt">{{ icon.name }}</label>
           </div>
-          <label class="icon-txt">{{ icon.name }}</label>
         </template>
       </van-tab>
     </van-tabs>
@@ -35,24 +37,29 @@ export default {
   },
   data() {
     return { icons: [] };
-  },
-  // props: ["list"]
+  }
 };
 </script>
 
 <style scoped>
-.icon-size {
-  width: 0.8rem;
-  height: 0.8rem;
-  background: #e6463a;
+.icon {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+}
+
+.icon-size {
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #e6463a;
   border-radius: 50%;
 }
 </style>
 <style lang="scss" scoped>
-.horizontal-list {
+.icons {
+  border-bottom: 0.2px solid #f5f5f5;
+  padding-bottom: 0.2rem;
   .van-tabs {
     .van-tabs__wrap {
       height: 100%;
