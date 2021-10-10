@@ -26,7 +26,7 @@ export default {
     this.$api.homepageDragonBallFn().then(
       res => {
         if (res.data.code == 200) {
-          console.log(res.data.data);
+          // console.log(res.data.data);
           this.icons = res.data.data;
         }
       },
