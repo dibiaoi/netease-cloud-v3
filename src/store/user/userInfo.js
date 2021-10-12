@@ -12,7 +12,7 @@ export default {
     mutations: {},
     actions: {
         setInfo({ commit, state }, data) {
-            console.log(data);
+            // console.log(data);
             state.userId = data.account.id;
             state.profile = data.profile;
             state.token = data.token;

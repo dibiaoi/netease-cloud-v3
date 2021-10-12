@@ -8,7 +8,8 @@ import {
     bannerSwiper,
     loginCellphone,
     homepageDragonBall,
-    relatedPlaylist
+    relatedPlaylist,
+    personalized
 } from "@/api/config.js";
 
 axios.interceptors.request.use(
@@ -41,6 +42,15 @@ export default {
     relatedPlaylistFn() {
         return axios.get(relatedPlaylist, {
             params: { id }
+        });
+    },
+    /**
+     * 推荐歌单
+     *@param {number} limit : 歌单数
+     */
+    personalizedFn(limit) {
+        return axios.get(personalized, {
+            params: { limit }
         });
     },
     /**发现页的icons */

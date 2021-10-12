@@ -6,8 +6,8 @@
           <div class="icon">
             <div class="icon-size">
               <van-image
-                width="0.8rem"
-                height="0.8rem"
+                width="0.6rem"
+                height="0.6rem"
                 fit="contain"
                 :src="icon.iconUrl"
               />
@@ -50,14 +50,18 @@ export default {
 }
 
 .icon-size {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
   background-color: #e6463a;
   border-radius: 50%;
+}
+.icon-txt{
+  font-size: 0.18rem;
 }
 </style>
 <style lang="scss" scoped>
 .icons {
+  background-color: #fff;
   border-bottom: 0.2px solid #f5f5f5;
   padding-bottom: 0.2rem;
   .van-tabs {

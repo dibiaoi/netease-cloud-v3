@@ -43,6 +43,9 @@ export default {};
   padding-bottom: 0px;
   border-bottom: 0.5px solid #f5f5f5;
   background: #fff;
+  .van-search{
+    flex: 5;
+  }
   .icon {
     flex: 1;
     display: flex;

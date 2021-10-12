@@ -44,6 +44,7 @@ export default {
   background: rgba(0, 0, 0, 0.1);
 }
 .banner-div {
+    background-color: #fff;
     padding: 0.2rem;
   .banner {
     border-radius: 0.2rem;
