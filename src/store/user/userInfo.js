@@ -7,7 +7,9 @@ export default {
     state: {
         userId: "",
         profile: "",
-        token: ""
+        token: "",
+        loginState: false,
+
     },
     mutations: {},
     actions: {

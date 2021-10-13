@@ -6,8 +6,8 @@
       <HorizontalList
         v-for="(item, index) in contentList"
         :key="index"
-        :headline=item.headline
-        :infoList=item.infoList
+        :headline="item.headline"
+        :infoList="item.infoList"
         :type="item.type"
       ></HorizontalList>
     </div>
@@ -31,6 +31,8 @@ export default {
   },
   created() {
     this.recommendSongs();
+    this.recommendVideo();
+
   },
   methods: {
     recommendSongs() {
@@ -46,6 +48,16 @@ export default {
             };
             this.contentList.push(item);
           }
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    },
+    recommendVideo() {
+      this.$api.timelineRecommendFn().then(
+        res => {
+          console.log(res.data);
         },
         err => {
           console.log(err);
