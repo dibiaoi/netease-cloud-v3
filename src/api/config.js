@@ -1,4 +1,5 @@
-const ip = "localhost";
+// const ip = "localhost";
+const ip = "192.168.43.214";
 const port = "3000";
 const baseURL = `http://${ip}:${port}`;
 const URL = `http://${ip}:${port}`;

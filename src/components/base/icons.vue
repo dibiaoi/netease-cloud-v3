@@ -6,8 +6,8 @@
           <div class="icon">
             <div class="icon-size">
               <van-image
-                width="0.6rem"
-                height="0.6rem"
+                width="0.8rem"
+                height="0.8rem"
                 fit="contain"
                 :src="icon.iconUrl"
               />
@@ -50,13 +50,13 @@ export default {
 }
 
 .icon-size {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.8rem;
+  height: 0.8rem;
   background-color: #e6463a;
   border-radius: 50%;
 }
 .icon-txt{
-  font-size: 0.18rem;
+  font-size: 0.2rem;
 }
 </style>
 <style lang="scss" scoped>

@@ -7,11 +7,11 @@
     </div>
     <div class="bottom">
       <!-- list -->
-      <div class="block" v-for="(songs, index) in songsList" :key="index">
+      <div class="block" v-for="(songs, index) in infoList" :key="index">
         <!-- 上下结构 -->
         <div class="front">
           <span class="cover"
-            ><van-icon name="play-circle-o" />{{
+            ><van-icon name="play-circle-o" />&nbsp;{{
               numberConversion(songs.playCount)
             }}</span
           >
@@ -27,29 +27,10 @@
 <script>
 export default {
   data() {
-    return {
-      headline: "每日推荐",
-      songsList: []
-    };
+    return {};
   },
-  props: [],
-  created() {
-    // 推荐歌单数
-    let limit = 5;
-    this.$api.personalizedFn(limit).then(
-      res => {
-        let { code, result } = res.data;
-        if (code == 200) {
-          this.songsList = result;
-          console.log(result);
-          this.headline = result[0].copywriter;
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  },
+  props: ["headline", "infoList", "type"],
+  created() {},
   mounted() {},
   methods: {
     numberConversion(value) {
@@ -66,7 +47,7 @@ export default {
         newValue[0] = parseInt(value / 10000);
         newValue[1] = "万";
       }
-       if (value < 100000) {
+      if (value < 100000) {
         newValue[0] = value + "";
         newValue[1] = "";
       }
@@ -93,7 +74,7 @@ export default {
         }
         newValue[1] = txt;
       }
-     
+
       return newValue.join("");
     }
   }
@@ -108,6 +89,8 @@ export default {
 <style lang="scss" scoped>
 .hlist {
   background: #fff;
+  border-radius: 0.2rem;
+  margin: 0.1rem 0;
   .top {
     padding: 0.2rem 0.2rem 0 0.2rem;
     display: flex;
@@ -118,7 +101,7 @@ export default {
       font-weight: 550;
     }
     .more {
-      font-size: 0.15rem;
+      font-size: 0.18rem;
       font-weight: 500;
       padding: 0.12rem 0.18rem;
       border: solid 0.5px #e7e7e7;
@@ -139,7 +122,7 @@ export default {
         position: relative;
         .cover {
           position: absolute;
-          font-size: 0.15rem;
+          font-size: 0.18rem;
           color: #fff;
           padding: 0.1rem;
           background-color: rgba(128, 128, 128, 0.5);
