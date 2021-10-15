@@ -1,6 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
-Vue.use(Vuex);
+import { test } from "@/request/api.js";
 
 export default {
     namespaced: true,
@@ -19,6 +17,16 @@ export default {
             state.profile = data.profile;
             state.token = data.token;
             localStorage.setItem("UserToken", data.token);
+        },
+        test({ commit, state }, data) {
+            console.log(data);
+            return new Promise((Resolve, reject) => {
+                test(data).then(res => {
+                    resolve(res);
+                }, err => {
+                    reject(err);
+                })
+            })
         }
     },
     modules: {}

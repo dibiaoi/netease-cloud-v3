@@ -32,7 +32,6 @@ export default {
   created() {
     this.recommendSongs();
     this.recommendVideo();
-
   },
   methods: {
     recommendSongs() {
@@ -55,9 +54,19 @@ export default {
       );
     },
     recommendVideo() {
+      /**
       this.$api.timelineRecommendFn().then(
         res => {
           console.log(res.data);
+        },
+        err => {
+          console.log(err);
+        }
+      );*/
+      let offset = { offset: 5, token: localStorage.getItem("UserToken") };
+      this.$store.dispatch("userInfo/test", offset).then(
+        res => {
+          console.log(res);
         },
         err => {
           console.log(err);

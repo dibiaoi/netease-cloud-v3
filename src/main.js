@@ -15,10 +15,17 @@ Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.prototype.$api = api;
-/* eslint-disable no-new */
-new Vue({
-    el: "#app",
-    router,
-    components: { App },
-    template: "<App/>"
+
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.title) {
+        document.title = to.meta.title;
+    }
+    next();
 });
+
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount("#app");
