@@ -8,7 +8,7 @@
 <script>
 export default {
   name: "App",
-  mounted() {
+  created() {
     this.$api.loginCellphoneFn("13974975922", "zhongjiahui20312").then(
       res => {
         // console.log(res.data);

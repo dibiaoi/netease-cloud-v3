@@ -4,10 +4,10 @@ import Vue from "vue";
 import App from "./App";
 import router from "./router";
 import store from "./store";
-
+import "./permission";
 import "@/plugins/vant.js";
 import api from "api";
-
+import Cookies from "js-cookie";
 import axios from "axios";
 
 Vue.config.productionTip = false;

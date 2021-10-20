@@ -63,15 +63,7 @@ export default {
           console.log(err);
         }
       );*/
-      let offset = { offset: 5, token: localStorage.getItem("UserToken") };
-      this.$store.dispatch("userInfo/test", offset).then(
-        res => {
-          console.log(res);
-        },
-        err => {
-          console.log(err);
-        }
-      );
+      
     }
   }
 };

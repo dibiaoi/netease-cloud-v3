@@ -20,13 +20,13 @@ axios.interceptors.request.use(
         // 如果存在，则统一在http请求的header都加上token，这样后台根据token判断你的登录情况
         // 即使本地存在token，也有可能token是过期的，所以在响应拦截器中要对返回状态进行判断
 
-        if (token) {
+        // if (token) {
             // config.headers.token = token;
             // config.headers.token = token;
             // console.log(config.headers.token);
-        } else {
-            console.log("当前没有token，应该获取token");
-        }
+        // } else {
+            // console.log("当前没有token，应该获取token");
+        // }
         return config;
     },
     error => {
