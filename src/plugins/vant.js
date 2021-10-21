@@ -17,6 +17,7 @@ import {
   CellGroup,
   Tab,
   Tabs,
+  Field,
   Image as VanImage
 } from "vant";
 
@@ -31,6 +32,7 @@ Vue.use(ActionSheet);
 Vue.use(PullRefresh);
 Vue.use(Cell);
 Vue.use(CellGroup);
+Vue.use(Field);
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.use(PasswordInput).use(NumberKeyboard);

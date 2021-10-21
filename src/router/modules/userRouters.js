@@ -5,7 +5,7 @@ const userRoutes = [
     meta: {
       role: ['user']
     },
-    component: () => import("@/views/login/test.vue"),
+    component: () => import("@/views/user/test.vue"),
     children: []
   }
 ];

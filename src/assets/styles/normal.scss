@@ -1,0 +1,20 @@
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin flex($fd,$jc,$ai) {
+  display: flex;
+  justify-content: $jc;
+  align-items: $ai;
+  flex-direction: $fd;
+}
+@mixin btn($w, $h) {
+  width: $w;
+  height: $h;
+  border-radius: 0.5rem;
+  margin: 0.2rem 0;
+  text-align: center;
+  border: solid 0.01rem #fff;
+  cursor: pointer;
+}

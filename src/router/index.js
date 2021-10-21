@@ -10,15 +10,34 @@ Router.prototype.push = function push(location) {
   return originalPush.call(this, location).catch(err => err);
 };
 
-
 export const constantRouterMap = [
   {
     path: "/",
-    name: "Find",
+    redirect: "/login"
+  },
+  {
+    path: "/find",
+    name: "find",
     meta: {
       title: "发现页"
     },
     component: () => import("@/views/find/find.vue")
+  },
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+      title: "登录"
+    },
+    component: () => import("@/views/login/login.vue")
+  },
+  {
+    path: "/login-phone",
+    name: "login-phone",
+    meta: {
+      title: "手机号登录"
+    },
+    component: () => import("@/views/login/loginPhoneNum.vue")
   }
 ];
 

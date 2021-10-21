@@ -5,14 +5,8 @@ import Cookies from "js-cookie";
 const whitelist = ["/"];
 
 router.beforeEach((to, from, next) => {
-  console.log(to);
-  // Cookies.remove("UserToken");
-  console.log(Cookies.get("UserToken"));
-
-  console.log(store.state.userInfo.roles);
   if (Cookies.get("UserToken")) {
     let roles = store.state.userInfo.roles;
-
     if (roles) {
       next();
     } else {
@@ -35,14 +29,16 @@ router.beforeEach((to, from, next) => {
               component: () => import("@/views/404.vue")
             }
           );
-          console.log(router.options.routes);
-          console.log("******");
-          console.log(routers);
+          // console.log(router.options.routes);
+          // console.log(routers);
           store.state.userInfo.roles = roles;
-          // console.log(store.state.userInfo.roles);
-          router.addRoutes(routers); //新方法
-
-          console.log(router.options.routes);
+          store.state.userInfo.loginState = true;
+          /**
+           * router.addRoutes(routers); 旧方法
+           */
+          for (let x of routers) {
+            router.addRoute(x);
+          }
           next({ ...to, replace: true });
         })
         .catch(err => console.log(err));
