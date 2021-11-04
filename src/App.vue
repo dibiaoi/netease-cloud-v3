@@ -9,15 +9,7 @@
 export default {
   name: "App",
   created() {
-    this.$api.loginCellphoneFn("13974975922", "zhongjiahui20312").then(
-      res => {
-        // console.log(res.data);
-        this.$store.dispatch("userInfo/setInfo", res.data);
-      },
-      err => {
-        console.log(res.data);
-      }
-    );
+    
   }
 };
 </script>

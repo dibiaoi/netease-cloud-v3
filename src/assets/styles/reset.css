@@ -191,7 +191,7 @@ sub {
 
 html {
     height: 100%;
-    font-size: 14vw;
+    font-size: calc(100vw / 6);
     -webkit-tap-highlight-color: transparent;
 }
 

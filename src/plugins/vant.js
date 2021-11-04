@@ -8,8 +8,6 @@ import {
   Button,
   Checkbox,
   CheckboxGroup,
-  PasswordInput,
-  NumberKeyboard,
   PullRefresh,
   Icon,
   List,
@@ -18,10 +16,16 @@ import {
   Tab,
   Tabs,
   Field,
+  Form,
+  Toast,
+  PasswordInput,
+  NumberKeyboard,
   Image as VanImage
 } from "vant";
 
 Vue.use(Tab);
+Vue.use(Form);
+Vue.use(Toast);
 Vue.use(VanImage);
 Vue.use(Tabs);
 Vue.use(Icon);
@@ -36,3 +40,5 @@ Vue.use(Field);
 Vue.use(Swipe).use(SwipeItem);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.use(PasswordInput).use(NumberKeyboard);
+
+Vue.prototype.$Toast = Toast;

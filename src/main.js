@@ -9,9 +9,11 @@ import "@/plugins/vant.js";
 import api from "api";
 import Cookies from "js-cookie";
 import axios from "axios";
+import MD5Encrypt from "js-md5";
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$md5 = MD5Encrypt;
 Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.prototype.$api = api;
