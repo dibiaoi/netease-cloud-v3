@@ -20,6 +20,10 @@ import {
   Toast,
   PasswordInput,
   NumberKeyboard,
+  Popup,
+  Cascader,
+  IndexBar,
+  IndexAnchor,
   Image as VanImage
 } from "vant";
 
@@ -28,7 +32,11 @@ Vue.use(Form);
 Vue.use(Toast);
 Vue.use(VanImage);
 Vue.use(Tabs);
+Vue.use(Cascader);
+Vue.use(IndexBar);
+Vue.use(IndexAnchor);
 Vue.use(Icon);
+Vue.use(Popup);
 Vue.use(List);
 Vue.use(Search);
 Vue.use(Button);
@@ -41,4 +49,4 @@ Vue.use(Swipe).use(SwipeItem);
 Vue.use(Checkbox).use(CheckboxGroup);
 Vue.use(PasswordInput).use(NumberKeyboard);
 
-Vue.prototype.$Toast = Toast;
+// Vue.prototype.$Toast = Toast;

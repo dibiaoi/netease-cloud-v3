@@ -7,7 +7,7 @@ export default {
     userProfile: "",
     token: "",
     loginState: false,
-    roles:""
+    roles: ""
   },
   mutations: {},
   actions: {
@@ -23,6 +23,14 @@ export default {
       Cookies.set("UserToken", data.token, {
         expires: 1
       });
+    },
+    cleanInfo({ commit, state }) {
+      state.userId = "";
+      state.userProfile = "";
+      state.token = "";
+      state.loginState = false;
+      state.roles = [];
+      Cookies.remove("UserToken");
     }
   },
   modules: {}

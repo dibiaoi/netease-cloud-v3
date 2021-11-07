@@ -1,20 +1,28 @@
 <template>
   <div class="login-contanier">
     <div class="login-navbar">
-      <van-icon v-show="step == 'num'" class="back-icon" name="cross" />
       <van-icon
-        v-show="step == 'captcha'"
+        v-show="step == 'num'"
+        @click="$router.go(-1)"
+        class="back-icon"
+        name="cross"
+      />
+      <van-icon
+        v-show="step != 'num'"
         @click="step = 'num'"
         class="back-icon"
         name="arrow-left"
       />
       <span>手机号登录</span>
+      <div pswLogin v-show="step == 'captcha'" @click="step = 'psw'">
+        密码登录
+      </div>
     </div>
     <div class="login-content" v-show="step == 'num'">
       <p>登录体验更多精彩</p>
       <p>末注册手机号登最后将自动创建帐号</p>
       <div class="login-input">
-        <div class="select-area">+86</div>
+        <div class="select-area">+{{ area }}<van-icon name="guide-o" /></div>
         <div>
           <van-field
             v-model="loginPhoneNum"
@@ -48,36 +56,77 @@
             "*".repeat(4) +
             loginPhoneNum.substr(-4, 4)
         }}
-        <div resend v-if="resend">重新获取</div>
+        <div resend v-if="resend" @click="sendCaptcha()">重新获取</div>
         <div wait v-else>{{ count }}s</div>
       </div>
       <van-password-input
-        :value="captcha"
+        v-model="captcha"
         :length="4"
+        :mask="false"
         :focused="showKeyboard"
+        @focus="showKeyboard = true"
       ></van-password-input>
+      <van-number-keyboard
+        v-model="captcha"
+        :show="showKeyboard"
+        @blur="showKeyboard = false"
+      />
     </div>
     <button v-show="step == 'num'" @click="verifyPhone" class="next-btn">
       下一步
     </button>
-    <button v-show="step != 'num'" @click="login()" class="next-btn">
+    <button v-show="step == 'psw'" @click="login()" class="next-btn">
       登录
     </button>
+    <van-popup
+      v-model="countrySelect"
+      round
+      position="bottom"
+      closeable
+      close-icon="close"
+      :style="{ height: '80%' }"
+    >
+      <div style="position: absolute;">搞一个顶</div>
+      <div>
+        <van-index-bar style="margin-top:20px;" :sticky="false">
+          <div v-for="(item, index) in countryTelList" :key="index">
+            <van-index-anchor :index="item.label" />
+            <van-cell
+              :title="country.zh"
+              :value="`+${country.code}`" 
+              v-for="country in item.countryList"
+              :key="country.code"
+            />
+          </div>
+        </van-index-bar>
+      </div>
+    </van-popup>
   </div>
 </template>
 
 <script>
+import { countryTelList } from "@/assets/country_tel_list.js";
 export default {
   data() {
     return {
       // num填写手机号页 captcha验证码页 psw密码登录页
-      step: "captcha",
+      step: "num",
       loginPhoneNum: "13974975922",
-      loginPsw: undefined,
+      loginPsw: "zhongjiahui20312",
       captcha: undefined,
-      resend: false,
-      count: 0
+      resend: true,
+      count: 0,
+      timer: null,
+      showKeyboard: true,
+      area: "86",
+      countrySelect: true,
+      countryTelList
     };
+  },
+  created() {
+    if (this.$store.state.userInfo.loginState) {
+      this.$router.go(-1);
+    }
   },
   methods: {
     verifyPhone() {
@@ -88,7 +137,7 @@ export default {
         this.$Toast({ message: "请输入正确的手机号", position: "bottom" });
       } else {
         this.step = "captcha";
-        sendCaptcha();
+        this.sendCaptcha();
       }
     },
     onlyNum(val) {
@@ -102,20 +151,79 @@ export default {
     sendCaptcha() {
       // 1.发送验证码
       // 2.倒计时
-      
+
+      const TIME_COUNT = 60;
+      if (!this.timer) {
+        this.count = TIME_COUNT;
+        this.resend = false;
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= TIME_COUNT) {
+            this.count--;
+          } else {
+            this.resend = true;
+            clearInterval(this.timer);
+            this.timer = null;
+          }
+        }, 1000);
+      }
+      this.$api.sendCaptcha(this.loginPhoneNum).then(
+        res => {
+          let msg = "";
+          if (res.data.code == 200) {
+            msg = "已发送验证码";
+          } else {
+            // this.$toast(res.data.message);
+            msg = res.data.message;
+            console.log(msg);
+          }
+          this.$toast({
+            message: msg,
+            position: "bottom"
+          });
+        },
+        err => {
+          console.log("发送验证码失败");
+        }
+      );
     },
     login() {
       // 网络请求
+      let msg = "";
       let psw = this.$md5(this.loginPsw);
       this.$api.loginCellphoneFn(this.loginPhoneNum, psw, this.captcha).then(
         res => {
           console.log(res.data);
-          this.$store.dispatch("userInfo/setInfo", res.data);
+          if (res.data.code == 200) {
+            this.$store.dispatch("userInfo/setInfo", res.data);
+            msg = "登录成功";
+            this.$router.replace({ path: "/find" });
+          } else {
+            msg = res.data.msg;
+          }
+          this.$toast({
+            message: msg,
+            position: "bottom"
+          });
         },
         err => {
-          console.log(res.data);
+          console.log(err.response);
+          this.$toast({
+            message: err.response.data.msg,
+            position: "bottom"
+          });
+          this.captcha = undefined;
         }
       );
+    }
+  },
+  watch: {
+    captcha: function(nVal) {
+      this.captcha = nVal.slice(0, 6);
+
+      if (nVal.length == 4) {
+        this.showKeyboard = false;
+        this.login();
+      }
     }
   }
 };
@@ -135,11 +243,22 @@ $nav-fs: 0.3rem;
     height: 1rem;
     line-height: 1rem;
     font-size: $nav-fs;
+    position: relative;
     @include flex(row, start, center);
     .back-icon {
       padding: 0.2rem $nav-fs 0.2rem 0;
 
       font-size: $nav-fs + 0.1rem;
+    }
+    div[pswLogin] {
+      position: absolute;
+      color: #616161;
+      right: 0;
+      font-size: 0.2rem;
+      border: solid 0.01rem #e0e0e0;
+      line-height: 0.2rem;
+      padding: 0.1rem 0.12rem;
+      border-radius: 0.2rem;
     }
   }
   .login-content {
@@ -186,7 +305,7 @@ $nav-fs: 0.3rem;
       span {
         flex: 1;
         font-size: 0.2rem;
-        color: rgb(13, 72, 148);
+        color: $blue_one;
         cursor: pointer;
       }
     }
@@ -194,6 +313,10 @@ $nav-fs: 0.3rem;
   .login-captcha {
     div[send] {
       @include flex(row, space-between);
+    }
+    div[resend] {
+      color: $blue_one;
+      cursor: pointer;
     }
     .van-password-input {
       margin: 0;
@@ -203,7 +326,8 @@ $nav-fs: 0.3rem;
     font-weight: 600;
     font-size: 0.2rem;
     line-height: 0.7rem;
-    background: #fe3a3b;
+    // background: #fe3a3b;
+    background: $btn_color_red;
     color: #fff;
     @include btn(100%, 0.7rem);
   }

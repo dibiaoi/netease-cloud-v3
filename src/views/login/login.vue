@@ -47,6 +47,11 @@ export default {
   data() {
     return {};
   },
+  created() {
+    if (this.$store.state.userInfo.loginState) {
+      this.$router.go(-1);
+    }
+  },
   methods: {
     go(path) {
       //  this.$router.push({ name: 'news-info', params: { id: newsId } })
@@ -68,7 +73,7 @@ $height: 0.8rem;
 .login-pre-container {
   width: 100%;
   height: 100%;
-  background-color: #dc2c1f;
+  background-color: $bg_one;
   display: flex;
   flex-direction: column;
   .icon {
@@ -87,7 +92,7 @@ $height: 0.8rem;
     .login-link-btn {
       @include btn(5rem, $height);
       span {
-        @include span(#dc2c1f);
+        @include span($bg_one);
       }
     }
     .direct-use-btn {

@@ -10,7 +10,8 @@ import {
   homepageDragonBall,
   relatedPlaylist,
   personalized,
-  timelineRecommend
+  timelineRecommend,
+  captcha
 } from "@/api/config.js";
 
 const token = localStorage.getItem("UserToken");
@@ -92,5 +93,12 @@ export default {
       };
     }
     return axios.post(loginCellphone, data);
+  },
+  /**
+   * 发送验证码
+   * @param {String} phone 手机号
+   */
+  sendCaptcha(phone) {
+    return axios.get(captcha, { params: { phone } });
   }
 };

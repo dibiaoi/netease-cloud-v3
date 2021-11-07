@@ -9,7 +9,12 @@
 export default {
   name: "App",
   created() {
-    
+    this.logout();
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("userInfo/cleanInfo");
+    }
   }
 };
 </script>

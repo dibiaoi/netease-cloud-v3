@@ -34,7 +34,7 @@ const Permission = {
       state.addRouters = Array.prototype.slice.call(routes);
       state.routers = constantRouterMap.concat(routes);
       router.options.routes = constantRouterMap.concat(routes);
-      console.log(router.options.routes);
+      // console.log(router.options.routes);
       localStorage.setItem("routesMenu", JSON.stringify(state.routers));
     }
   },
@@ -43,9 +43,9 @@ const Permission = {
       return new Promise(resolve => {
         const roles = [];
         roles.push(data.roles[0]);
-        console.log(roles);
+        // console.log(roles);
         const accessedRouters = filterAsyncRoutes(asyncRouterMap, roles);
-        console.log(accessedRouters);
+        // console.log(accessedRouters);
         commit("setRouters", accessedRouters);
         resolve(accessedRouters);
       });
