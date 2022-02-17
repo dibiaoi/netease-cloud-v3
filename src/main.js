@@ -18,7 +18,7 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.prototype.$api = api;
 
-
+//浅做些修改
 router.beforeEach((to, from, next) => {
     if (to.meta.title) {
         document.title = to.meta.title;
