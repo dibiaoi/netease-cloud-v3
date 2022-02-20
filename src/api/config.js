@@ -1,5 +1,5 @@
-// const ip = "localhost";
-const ip = "192.168.43.214";
+const ip = "localhost";
+// const ip = "192.168.43.214";
 const port = "3000";
 const baseURL = `http://${ip}:${port}`;
 const URL = `http://${ip}:${port}`;
@@ -14,3 +14,5 @@ export const homepageDragonBall = API + "/homepage/dragon/ball"; //首页-发现
 export const relatedPlaylist = API + "/related/playlist"; //根据歌单id相关歌单推荐
 export const personalized = API + "/personalized"; //歌单推荐 limit
 export const timelineRecommend = API + "/video/timeline/recommend"; //推荐视频
+export const playlistDetail = API + "/playlist/detail"; //歌单详情
+export const songURL = API + "/song/url"; //音乐url

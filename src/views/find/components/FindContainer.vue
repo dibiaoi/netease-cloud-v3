@@ -45,6 +45,7 @@ export default {
               infoList: result,
               type: "songs"
             };
+            console.log(result);
             this.contentList.push(item);
           }
         },
@@ -63,7 +64,6 @@ export default {
           console.log(err);
         }
       );*/
-      
     }
   }
 };

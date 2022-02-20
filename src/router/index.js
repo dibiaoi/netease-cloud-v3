@@ -38,6 +38,28 @@ export const constantRouterMap = [
       title: "手机号登录"
     },
     component: () => import("@/views/login/loginPhoneNum.vue")
+  },
+  {
+    path: "/songsList",
+    name: "songsList",
+    //  props: router => ({
+    //    playlist: router.query.playlistInfo
+    //  }),
+    meta: {
+      title: "歌单详情页"
+    },
+    component: () => import("@/views/base/songsList.vue")
+  },
+  {
+    path: "/player",
+    name: "player",
+    props: router => ({
+      id: router.query.id
+    }),
+    meta: {
+      title: "播放页"
+    },
+    component: () => import("@/views/base/player.vue")
   }
 ];
 
@@ -51,4 +73,4 @@ const router = new Router({
 });
 
 export default router;
-console.log(router.options.routes);
+// console.log(router.options.routes);

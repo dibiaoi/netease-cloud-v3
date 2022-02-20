@@ -7,7 +7,12 @@
     </div>
     <div class="bottom">
       <!-- list -->
-      <div class="block" v-for="(songs, index) in infoList" :key="index">
+      <div
+        class="block"
+        v-for="songs in infoList"
+        :key="songs.id"
+        @click="turnToRouter(songs)"
+      >
         <!-- 上下结构 -->
         <div class="front">
           <span class="cover"
@@ -76,6 +81,11 @@ export default {
       }
 
       return newValue.join("");
+    },
+    turnToRouter(item) {
+      this.$store.commit("setPlaylistInfo", item);
+      console.log("跳转到歌单详情页");
+      this.$router.push({ name: "songsList" });
     }
   }
 };

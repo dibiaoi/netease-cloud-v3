@@ -11,7 +11,9 @@ import {
   relatedPlaylist,
   personalized,
   timelineRecommend,
-  captcha
+  captcha,
+  playlistDetail,
+  songURL
 } from "@/api/config.js";
 
 const token = localStorage.getItem("UserToken");
@@ -100,5 +102,11 @@ export default {
    */
   sendCaptcha(phone) {
     return axios.get(captcha, { params: { phone } });
+  },
+  playlistDetailFn(playlistId) {
+    return axios.get(playlistDetail, { params: { id: playlistId } });
+  },
+  songURLFn(musicId) {
+    return axios.get(songURL, { params: { id: musicId } });
   }
 };

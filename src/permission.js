@@ -14,7 +14,7 @@ router.beforeEach((to, from, next) => {
       store
         .dispatch("GenerateRoutes", { roles })
         .then(routers => {
-          console.log(routers);
+          // console.log(routers);
           routers.push(
             {
               path: "*",
@@ -44,7 +44,7 @@ router.beforeEach((to, from, next) => {
         .catch(err => console.log(err));
     }
   } else {
-    console.log(to);
+    // console.log(to);
     if (whitelist.indexOf(to.path) !== -1) {
       console.log(whitelist.indexOf(to.path));
       console.log(router.options.routes);

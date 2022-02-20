@@ -1,0 +1,309 @@
+<template>
+  <div class="songListBody" v-if="playListDetails !== null">
+    <div class="songs">
+      <div class="songsBar">
+        <label class="playAll">播放全部</label>
+        <label class="songCount">(共{{ trackCount }}首)</label>
+        <label class="collect">收藏 ({{ collectNum }})</label>
+      </div>
+    </div>
+    <div>
+      <div v-for="(song, index) in curSongsList" :key="song.id" class="song">
+        <div @click="toPlayPage(song.id, index)">{{ song.id }}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  props: ["playListDetails"],
+  data() {
+    return {
+      collectNum: "",
+      trackCount: 0
+    };
+  },
+  created() {
+  },
+  mounted() {},
+
+  methods: {
+    toPlayPage(id, index) {
+      this.$store.commit("play/setMusicListIndex", index);
+      this.$router.push({
+        path: "/player/",
+        query: {
+          id
+        }
+      });
+    }
+  },
+  computed: {
+    ...mapGetters('play',['curSongsList'])
+  },
+  watch: {
+    playListDetails(newVal) {
+      const { playlist } = newVal;
+      this.collectNum = playlist.subscribedCount;
+      this.trackCount = playlist.trackCount;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.songListBody {
+  width: 100%;
+  position: relative;
+}
+.listData {
+  width: 100%;
+  height: calc(40vw + 66px);
+  position: relative;
+  left: 0;
+  top: 0;
+  margin: 20px 0 0 0;
+}
+/* 歌单封面 */
+.picBox {
+  width: 40vw;
+  height: 40vw;
+  margin-left: 10px;
+  position: relative;
+}
+.playPic {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-size: cover;
+}
+.loveIcon {
+  width: 60%;
+  height: 60%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.loveListMask::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.playCount {
+  font-size: 0.1rem;
+  color: #f0f8ff;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background: rgba(0, 0, 0, 0.2) url("../../assets/img/earphones.png") no-repeat;
+  padding-left: 15px;
+}
+.detail {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+/* 歌单名和作者 */
+.creator {
+  width: 50vw;
+  height: 40vw;
+  position: absolute;
+  left: calc(40vw + 20px);
+  top: 0;
+  color: white;
+  overflow: hidden;
+}
+.listTitle {
+  position: absolute;
+  top: 5vw;
+  overflow: hidden;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+/* 设置一个容器装载是为了不论作者昵称多长右箭头都能紧挨在右边 */
+.nickNameBox {
+  width: calc(100% - 45px);
+  height: 35px;
+  position: absolute;
+  bottom: 5vw;
+  padding-left: 43px;
+  overflow: hidden;
+}
+.nickName {
+  max-width: calc(100% - 55px);
+  line-height: 35px;
+  padding-right: 10px;
+  position: absolute;
+  background: url("../../assets/img//rightArrow.png") no-repeat
+    calc(100% + 10px) 5px;
+  font-size: 0.11rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.creatorPic {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5vw;
+}
+/* 功能选项 */
+.bar {
+  width: 100%;
+  font-size: 0.1rem;
+  color: white;
+  padding: 10px 0 0 0;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+}
+.barItem {
+  flex: 1;
+  text-align: center;
+}
+.songs {
+  width: 100%;
+}
+.songsBar {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 10px;
+  box-sizing: border-box;
+}
+.playAll {
+  background: url("../../assets/img/play1.png") no-repeat 15px 30px;
+  padding: 30px 0 0 40px;
+  line-height: 47px;
+}
+.songCount {
+  font-size: 0.3rem;
+}
+.collect {
+  float: right;
+  font-size: 0.2rem;
+  width: 120px;
+  height: 50px;
+  background: #db4139 url("../../assets/img/collect.png") no-repeat 5px 16px;
+  padding-left: 25px;
+  box-sizing: border-box;
+  line-height: 50px;
+  color: white;
+  border-top-right-radius: 10px;
+}
+.song {
+  width: 100%;
+  padding: 25px;
+  background-color: white;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 999;
+}
+.animation {
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+.song:after {
+  content: "";
+  width: calc(100% - 40px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-top: 1px solid #dcdcdc;
+  margin-left: 40px;
+}
+.songNum {
+  width: 40px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  color: #c0c0c0;
+}
+.playing {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.songName {
+  width: calc(100% - 120px);
+  position: absolute;
+  left: 40px;
+  top: 7px;
+  font-size: 0.5rem;
+  /* 超出的宽度的文本用省略号显示 */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.writer {
+  width: calc(100% - 120px);
+  font-size: 0.3rem;
+  position: absolute;
+  left: 40px;
+  bottom: 7px;
+  color: #c0c0c0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.showMv {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: url("../../assets/img/video2.png") no-repeat calc(100% - 45px)
+    center;
+}
+.more {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.delete {
+  width: 60px;
+  height: 50px;
+  position: absolute;
+  right: -60px;
+  top: 0;
+  background-color: #e2362d;
+  color: white;
+  line-height: 50px;
+  text-align: center;
+  font-size: 0.4rem;
+  transition: all 0.5s;
+  z-index: 99;
+}
+/* 删除按钮退出 */
+.song[data-type="0"] {
+  transform: translate3d(0, 0, 0);
+}
+/* 删除按钮进入 */
+.song[data-type="1"] {
+  transform: translate3d(-60px, 0, 0);
+}
+.mask {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 99;
+}
+</style>
