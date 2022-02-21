@@ -1,11 +1,13 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
+    <song-audio />
     <router-view />
   </div>
 </template>
 
 <script>
+import songAudio from "@/components/base/songAudio.vue";
+import SongAudio from "./components/base/songAudio.vue";
 export default {
   name: "App",
   created() {
@@ -15,6 +17,9 @@ export default {
     logout() {
       this.$store.dispatch("userInfo/cleanInfo");
     }
+  },
+  components: {
+    songAudio
   }
 };
 </script>
@@ -28,5 +33,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f2f2f2;
+}
+.icon-iconfont {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

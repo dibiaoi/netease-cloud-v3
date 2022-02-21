@@ -16,3 +16,4 @@ export const personalized = API + "/personalized"; //歌单推荐 limit
 export const timelineRecommend = API + "/video/timeline/recommend"; //推荐视频
 export const playlistDetail = API + "/playlist/detail"; //歌单详情
 export const songURL = API + "/song/url"; //音乐url
+export const songDetail = API + "/song/detail"; //音乐详情

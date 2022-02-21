@@ -8,8 +8,13 @@ import "./permission";
 import "@/plugins/vant.js";
 import api from "api";
 import Cookies from "js-cookie";
+
 import axios from "axios";
 import MD5Encrypt from "js-md5";
+
+import "@/assets/js/iconfont.js";
+import "@/assets/js/iconfont1.js";
+import "@/assets/js/iconfont2.js";
 
 Vue.config.productionTip = false;
 

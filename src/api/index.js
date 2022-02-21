@@ -13,7 +13,8 @@ import {
   timelineRecommend,
   captcha,
   playlistDetail,
-  songURL
+  songURL,
+  songDetail
 } from "@/api/config.js";
 
 const token = localStorage.getItem("UserToken");
@@ -108,5 +109,8 @@ export default {
   },
   songURLFn(musicId) {
     return axios.get(songURL, { params: { id: musicId } });
+  },
+  songDetailFn(musicId) {
+    return axios.get(songDetail, { params: { ids: musicId } });
   }
 };

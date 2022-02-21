@@ -55,6 +55,24 @@ export default {
     },
     setAutoNext: (s, autoNextSong) => {
       s.autoNextSong = autoNextSong;
+    },
+    setUrl: (s, url) => {
+      s.curMusicUrl = url;
+    },
+    setTitle: (s, title) => {
+      s.musicTitle = title;
+    },
+    setArtist: (s, artist) => {
+      s.artist = artist;
+    },
+    setPicUrl: (s, musicPicUrl) => {
+      s.musicPicUrl = musicPicUrl;
+    },
+    setChangeTime: (s, newTime) => {
+      s.changeMusicTime = newTime;
+    },
+    setPlayBtnIcon: (s, iconName) => {
+      s.playBtnIcon = iconName;
     }
   },
   actions: {},

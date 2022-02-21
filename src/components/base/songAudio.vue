@@ -1,7 +1,7 @@
 <template>
   <div class="song-audio">
     <audio
-      :src="url"
+      :src="curMusicUrl"
       controls="controls"
       id="player"
       preload="true"
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import { mapGetters } from "vuex";
 
 export default {
@@ -29,7 +28,7 @@ export default {
     ...mapGetters("play", [
       "curMusicId", // 音乐id
       "curMusicUrl", // 音乐链接
-      "curMusicUrl", // 存放的音乐
+      "curSongsList", // 存放的音乐
       "isPlay", // 播放状态
       "musicCurTime", // 当前音乐的播放位置
       "changeMusicTime", // 指定播放时刻
@@ -54,16 +53,16 @@ export default {
   methods: {
     // 得到id后获取歌曲
     getSong() {
-      this.$store.commit("setCurTime", 0);
-      this.$store.commit("setIsPlay", false);
+      this.$store.commit("play/setCurTime", 0);
+      this.$store.commit("play/setIsPlay", false);
 
       this.$api
         .songURLFn(this.curMusicId)
         .then(res => {
-          this.$store.commit("setUrl", res.data.data[0].url);
+          this.$store.commit("play/setUrl", res.data.data[0].url);
         })
         .catch(error => {
-          this.$store.commit("setUrl", "");
+          this.$store.commit("play/setUrl", "");
           console.log(error);
         });
     },
@@ -79,21 +78,21 @@ export default {
     // 获取歌曲链接后准备播放
     startPlay() {
       let player = document.querySelector("#player");
-      this.$store.commit("setDuration", player.duration);
-      开始播放;
+      this.$store.commit("play/setDuration", player.duration);
+      // 开始播放;
       player.play();
-      this.$store.commit("setIsPlay", true);
+      this.$store.commit("play/setIsPlay", true);
     },
     // 音乐播放时记录音乐的播放位置
     timeupdate() {
       let player = document.querySelector("#player");
-      this.$store.commit("setCurTime", player.currentTime);
+      this.$store.commit("play/setCurTime", player.currentTime);
     },
     // 音乐播放结束时触发
     ended() {
-      this.$store.commit("setIsPlay", false);
-      this.$store.commit("setCurTime", 0);
-      this.$store.commit("setAutoNext", !this.autoNextSong);
+      this.$store.commit("play/setIsPlay", false);
+      this.$store.commit("play/setCurTime", 0);
+      this.$store.commit("play/setAutoNext", !this.autoNextSong);
     }
   }
 };
