@@ -85,7 +85,7 @@ export default {
     turnToRouter(item) {
       this.$store.commit("setPlaylistInfo", item);
       console.log("跳转到歌单详情页");
-      this.$router.push({ name: "songsList" });
+      this.$router.push({ name: "songsList", query: { playlistId: item.id } });
     }
   }
 };

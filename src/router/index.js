@@ -11,57 +11,57 @@ Router.prototype.push = function push(location) {
 };
 
 export const constantRouterMap = [
-  {
-    path: "/",
-    redirect: "/login"
-  },
-  {
-    path: "/find",
-    name: "find",
-    meta: {
-      title: "发现页"
-    },
-    component: () => import("@/views/find/find.vue")
-  },
-  {
-    path: "/login",
-    name: "login",
-    meta: {
-      title: "登录"
-    },
-    component: () => import("@/views/login/login.vue")
-  },
-  {
-    path: "/login-phone",
-    name: "login-phone",
-    meta: {
-      title: "手机号登录"
-    },
-    component: () => import("@/views/login/loginPhoneNum.vue")
-  },
-  {
-    path: "/songsList",
-    name: "songsList",
-    //  props: router => ({
-    //    playlist: router.query.playlistInfo
-    //  }),
-    meta: {
-      title: "歌单详情页"
-    },
-    component: () => import("@/views/base/songsList.vue")
-  },
-  {
-    path: "/player/:id",
-    name: "player",
-    // props: router => ({
-    //   id: router.query.id
-    // }),
-    meta: {
-      title: "播放页"
-    },
-    component: () => import("@/views/base/player.vue")
-  }
-];
+         {
+           path: "/",
+           redirect: "/login"
+         },
+         {
+           path: "/find",
+           name: "find",
+           meta: {
+             title: "发现页"
+           },
+           component: () => import("@/views/find/find.vue")
+         },
+         {
+           path: "/login",
+           name: "login",
+           meta: {
+             title: "登录"
+           },
+           component: () => import("@/views/login/login.vue")
+         },
+         {
+           path: "/login-phone",
+           name: "login-phone",
+           meta: {
+             title: "手机号登录"
+           },
+           component: () => import("@/views/login/loginPhoneNum.vue")
+         },
+         {
+           path: "/songsList",
+           name: "songsList",
+           props: router => ({
+             playlistId: router.query.playlistId
+           }),
+           meta: {
+             title: "歌单详情页"
+           },
+           component: () => import("@/views/base/songsList.vue")
+         },
+         {
+           path: "/player/:id",
+           name: "player",
+           // props: router => ({
+           //   id: router.query.id
+           // }),
+           meta: {
+             title: "播放页"
+           },
+           component: () => import("@/views/base/player.vue")
+         }
+       ];
 
 export const asyncRouterMap = [...userRoutes];
 

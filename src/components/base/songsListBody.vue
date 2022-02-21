@@ -1,15 +1,38 @@
 <template>
-  <div class="songListBody" v-if="playListDetails !== null">
-    <div class="songs">
-      <div class="songsBar">
-        <label class="playAll">播放全部</label>
-        <label class="songCount">(共{{ trackCount }}首)</label>
-        <label class="collect">收藏 ({{ collectNum }})</label>
+  <div>
+    <div id="item-top" v-if="playListDetails!==null">
+      <div class="item-l">
+        <!--播放-->
+        <div>
+          <svg class="icon-iconfont" aria-hidden="true">
+            <use xlink:href="#icon-shipin" />
+          </svg>
+        </div>
+        播放全部(共{{ trackCount }}首)
       </div>
+      <div class="item-r">+ 收藏({{ collectNum }})</div>
     </div>
-    <div>
-      <div v-for="(song, index) in curSongsList" :key="index" class="song">
-        <div @click="toPlayPage(song.id, index)">{{ song.id }}</div>
+    <div class="song-list-dic">
+      <div
+        @click="toPlayPage(song.id, index)"
+        v-for="(song, index) in curSongsList"
+        :key="index"
+        class="song-item"
+      >
+        <!-- <div >{{ song.id }}</div> -->
+        <!--序号-->
+        <div class="line-l">{{ index + 1 }}</div>
+        <!--歌曲-->
+        <div class="line-m">
+          <span>{{ song.name }}</span>
+          <span>{{ song.ar[0].name }} - {{ song.al.name }}</span>
+        </div>
+        <!--三个点-->
+        <div class="line-r">
+          <svg class="icon-iconfont" aria-hidden="true">
+            <use xlink:href="#icon-gengduoxiao" />
+          </svg>
+        </div>
       </div>
     </div>
   </div>
@@ -18,14 +41,16 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  props: ["playListDetails"],
   data() {
     return {
+      show: false,
       collectNum: "",
       trackCount: 0
     };
   },
-  created() {},
+  created() {
+    console.log("curSongsList", this.curSongsList);
+  },
   mounted() {},
 
   methods: {
@@ -36,11 +61,14 @@ export default {
       });
     }
   },
+  props: ["playListDetails"],
   computed: {
     ...mapGetters("play", ["curSongsList"])
   },
   watch: {
     playListDetails(newVal) {
+      console.log("playListDetails", newVal);
+      this.show = true;
       const { playlist } = newVal;
       this.collectNum = playlist.subscribedCount;
       this.trackCount = playlist.trackCount;
@@ -50,256 +78,95 @@ export default {
 </script>
 
 <style scoped>
-.songListBody {
+/*------------------白红框框----------------------*/
+#item-top {
+  top: 60px;
+  position: sticky;
+  display: flex;
   width: 100%;
-  position: relative;
-}
-.listData {
-  width: 100%;
-  height: calc(40vw + 66px);
-  position: relative;
-  left: 0;
-  top: 0;
-  margin: 20px 0 0 0;
-}
-/* 歌单封面 */
-.picBox {
-  width: 40vw;
-  height: 40vw;
-  margin-left: 10px;
-  position: relative;
-}
-.playPic {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  background-size: cover;
-}
-.loveIcon {
-  width: 60%;
-  height: 60%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   z-index: 1;
 }
-.loveListMask::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.6);
+
+#item-top .item-l,
+#item-top .item-r {
+  line-height: 60px;
+  vertical-align: middle;
+  height: 60px;
 }
-.playCount {
-  font-size: 0.1rem;
-  color: #f0f8ff;
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  background: rgba(0, 0, 0, 0.2) url("../../assets/img/earphones.png") no-repeat;
-  padding-left: 15px;
+
+#item-top .item-l {
+  width: 60%;
+  background-color: #fcfdfe;
+  border-radius: 20px 0 0 0;
 }
-.detail {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
+
+#item-top .item-l > div {
+  display: inline-block;
+  width: 30px;
+  height: 49px;
+  margin-left: 15px;
+  vertical-align: middle;
 }
-/* 歌单名和作者 */
-.creator {
-  width: 50vw;
-  height: 40vw;
-  position: absolute;
-  left: calc(40vw + 20px);
-  top: 0;
+
+#item-top .item-l .icon {
+  color: black;
+}
+
+#item-top .item-r {
+  width: 40%;
+  background-color: #d7463f;
   color: white;
-  overflow: hidden;
+  border-radius: 0 20px 0 0;
+  text-align: center;
 }
-.listTitle {
-  position: absolute;
-  top: 5vw;
-  overflow: hidden;
-  white-space: pre-wrap;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-overflow: ellipsis;
-}
-/* 设置一个容器装载是为了不论作者昵称多长右箭头都能紧挨在右边 */
-.nickNameBox {
-  width: calc(100% - 45px);
-  height: 35px;
-  position: absolute;
-  bottom: 5vw;
-  padding-left: 43px;
-  overflow: hidden;
-}
-.nickName {
-  max-width: calc(100% - 55px);
-  line-height: 35px;
-  padding-right: 10px;
-  position: absolute;
-  background: url("../../assets/img//rightArrow.png") no-repeat
-    calc(100% + 10px) 5px;
-  font-size: 0.11rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.creatorPic {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 5vw;
-}
-/* 功能选项 */
-.bar {
+/*--------------------歌曲列表--------------------------*/
+.song-list-dic {
   width: 100%;
-  font-size: 0.1rem;
-  color: white;
-  padding: 10px 0 0 0;
-  box-sizing: border-box;
   position: relative;
+}
+
+.song-list-dic .song-item {
+  height: 50px;
+  width: 100%;
+  background-color: white;
   display: flex;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e3e4e5;
 }
-.barItem {
-  flex: 1;
-  text-align: center;
-}
-.songs {
-  width: 100%;
-}
-.songsBar {
-  width: 100%;
+
+.song-list-dic .song-item .line-l,
+.song-list-dic .song-item .line-r {
+  width: 50px;
   height: 50px;
-  background-color: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 10px;
-  box-sizing: border-box;
-}
-.playAll {
-  background: url("../../assets/img/play1.png") no-repeat 15px 30px;
-  padding: 30px 0 0 40px;
-  line-height: 47px;
-}
-.songCount {
-  font-size: 0.3rem;
-}
-.collect {
-  float: right;
-  font-size: 0.2rem;
-  width: 120px;
-  height: 50px;
-  background: #db4139 url("../../assets/img/collect.png") no-repeat 5px 16px;
-  padding-left: 25px;
-  box-sizing: border-box;
-  line-height: 50px;
-  color: white;
-  border-top-right-radius: 10px;
-}
-.song {
-  width: 100%;
-  padding: 25px;
-  background-color: white;
-  box-sizing: border-box;
-  position: relative;
-  z-index: 999;
-}
-.animation {
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-}
-.song:after {
-  content: "";
-  width: calc(100% - 40px);
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-top: 1px solid #dcdcdc;
-  margin-left: 40px;
-}
-.songNum {
-  width: 40px;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
   text-align: center;
-  color: #c0c0c0;
+  color: #a1a2a2;
+  line-height: 60px;
 }
-.playing {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.songName {
-  width: calc(100% - 120px);
-  position: absolute;
-  left: 40px;
-  top: 7px;
-  font-size: 0.5rem;
-  /* 超出的宽度的文本用省略号显示 */
+
+.song-list-dic .song-item .line-m {
+  width: 80%;
+  height: 50px;
   overflow: hidden;
+  font-size: 1em;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.writer {
-  width: calc(100% - 120px);
-  font-size: 0.3rem;
-  position: absolute;
-  left: 40px;
-  bottom: 7px;
-  color: #c0c0c0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+
+.song-list-dic .song-item .line-m span:last-child {
+  font-size: 0.8em;
+  color: #959696;
 }
-.showMv {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: url("../../assets/img/video2.png") no-repeat calc(100% - 45px)
-    center;
+
+.song-list-dic .song-item .icon {
+  color: #a1a2a2;
 }
-.more {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.delete {
-  width: 60px;
-  height: 50px;
-  position: absolute;
-  right: -60px;
-  top: 0;
-  background-color: #e2362d;
-  color: white;
-  line-height: 50px;
-  text-align: center;
-  font-size: 0.4rem;
-  transition: all 0.5s;
-  z-index: 99;
-}
-/* 删除按钮退出 */
-.song[data-type="0"] {
-  transform: translate3d(0, 0, 0);
-}
-/* 删除按钮进入 */
-.song[data-type="1"] {
-  transform: translate3d(-60px, 0, 0);
-}
-.mask {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 99;
+
+.icon {
+  color: #ffffff;
 }
 </style>
