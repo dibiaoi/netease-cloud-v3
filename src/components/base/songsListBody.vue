@@ -8,7 +8,7 @@
       </div>
     </div>
     <div>
-      <div v-for="(song, index) in curSongsList" :key="song.id" class="song">
+      <div v-for="(song, index) in curSongsList" :key="index" class="song">
         <div @click="toPlayPage(song.id, index)">{{ song.id }}</div>
       </div>
     </div>
@@ -25,23 +25,19 @@ export default {
       trackCount: 0
     };
   },
-  created() {
-  },
+  created() {},
   mounted() {},
 
   methods: {
     toPlayPage(id, index) {
       this.$store.commit("play/setMusicListIndex", index);
       this.$router.push({
-        path: "/player/",
-        query: {
-          id
-        }
+        path: "/player/" + id
       });
     }
   },
   computed: {
-    ...mapGetters('play',['curSongsList'])
+    ...mapGetters("play", ["curSongsList"])
   },
   watch: {
     playListDetails(newVal) {

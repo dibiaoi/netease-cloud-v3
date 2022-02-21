@@ -51,11 +51,11 @@ export const constantRouterMap = [
     component: () => import("@/views/base/songsList.vue")
   },
   {
-    path: "/player",
+    path: "/player/:id",
     name: "player",
-    props: router => ({
-      id: router.query.id
-    }),
+    // props: router => ({
+    //   id: router.query.id
+    // }),
     meta: {
       title: "播放页"
     },

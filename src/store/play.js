@@ -73,6 +73,12 @@ export default {
     },
     setPlayBtnIcon: (s, iconName) => {
       s.playBtnIcon = iconName;
+    },
+    setLyric: (s, lyric) => {
+      s.lyric = lyric;
+    },
+    setLrc: (s, lrc) => {
+      s.lrc = lrc;
     }
   },
   actions: {},

@@ -14,7 +14,8 @@ import {
   captcha,
   playlistDetail,
   songURL,
-  songDetail
+  songDetail,
+  getLyric
 } from "@/api/config.js";
 
 const token = localStorage.getItem("UserToken");
@@ -112,5 +113,8 @@ export default {
   },
   songDetailFn(musicId) {
     return axios.get(songDetail, { params: { ids: musicId } });
+  },
+  getLyricFn(musicId) {
+    return axios.get(getLyric, { params: { id: musicId } });
   }
 };

@@ -6,7 +6,6 @@
       <div class="back" @click="goBack(-1)">
         <svg class="icon-iconfont" aria-hidden="true">
           <use xlink:href="#icon-fanhui01"></use>
-          iconfont symbol使用
         </svg>
       </div>
       <!--标题-->
@@ -16,7 +15,6 @@
       </div>
       <!--分享-->
       <div class="forwarding">
-        分享
         <svg class="icon-iconfont" aria-hidden="true">
           <use xlink:href="#icon-fenxiang"></use>
         </svg>
@@ -91,7 +89,7 @@
           </svg>
         </div>
         <!--上一首-->
-        <div @click="prev">
+        <div @click="prev()">
           <svg class="icon-iconfont" aria-hidden="true">
             <use xlink:href="#icon-shangyishou"></use>
           </svg>
@@ -117,8 +115,11 @@
       </div>
     </div>
     <!--背景-->
-    <!-- <div class="picbg" :style='{background: "url(" + musicPicUrl + ")"}'></div>
-    <div class="picbg2"></div> -->
+    <div
+      class="picbg"
+      :style="{ background: 'url(' + musicPicUrl + ')' }"
+    ></div>
+    <div class="picbg2"></div>
   </div>
 </template>
 
@@ -139,14 +140,16 @@ export default {
       playIcon: playIcon
     };
   },
-  props: ["id"],
   created() {},
   mounted() {
-    console.log(this.curMusicId, this.id);
-    // if (this.curMusicId && this.curMusicId !== this.id) {
-    this.$store.commit("play/setCurMusicId", this.id);
-    this.getSongDetail(this.id);
-    // }
+    // 获取进度条的长度
+    this.progressLength = this.$refs.progress.getBoundingClientRect().width;
+    let thisId = this.$route.params.id;
+    console.log(this.curMusicId, thisId);
+    if (thisId || this.curMusicId !== thisId) {
+      this.$store.commit("play/setCurMusicId", thisId);
+      this.getSongDetail(this.curMusicId);
+    }
   },
   computed: {
     ...mapGetters("play", [
@@ -206,8 +209,8 @@ export default {
     },
     getSongDetail(id) {
       this.$api.songDetailFn(id).then(res => {
-        console.log(res.data);
-        // this.getLyric()
+        console.log("getSongDetail", res.data);
+        this.getLyric(id);
         this.$store.commit("play/setTitle", res.data.songs[0].name);
         this.$store.commit("play/setArtist", res.data.songs[0].ar[0].name);
         this.$store.commit("play/setPicUrl", res.data.songs[0].al.picUrl);
@@ -215,7 +218,47 @@ export default {
         window.sessionStorage.setItem("picUrl", res.data.songs[0].al.picUrl);
       });
     },
-    getLyric() {},
+    // 获取歌词
+    getLyric(id) {
+      this.$api
+        .getLyricFn(id)
+        .then(res => {
+          let lrc = this.parseLyric(res.data.lrc.lyric);
+          this.$store.commit("play/setLyric", res.data.lrc.lyric);
+          this.$store.commit("play/setLrc", lrc);
+          // console.log("<---歌词--->");
+          // console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    // 处理歌词，按行保存到数组
+    parseLyric(text) {
+      var lines = text.split("\n");
+      var pattern = /\[\d{2}:\d{2}.(\d{3}|\d{2})\]/g;
+      var result = [];
+      while (!pattern.test(lines[0])) {
+        lines = lines.slice(1);
+      }
+      lines[lines.length - 1].length === 0 && lines.pop();
+      lines.forEach(function(item) {
+        let time = item.match(pattern); // 存前面的时间段
+        let value = item.replace(pattern, ""); // 存歌词
+        // console.log(time) // 时间
+        // console.log(value) // 歌词数据
+        time.forEach(function(item1) {
+          var t = item1.slice(1, -1).split(":");
+          if (value !== "") {
+            result.push([parseInt(t[0], 10) * 60 + parseFloat(t[1]), value]);
+          }
+        });
+      });
+      result.sort(function(a, b) {
+        return a[0] - b[0];
+      });
+      return result;
+    },
     //  拖拽开始
     touchstart(e) {
       this.touchStartX = e.touches[0].pageX;
@@ -240,26 +283,26 @@ export default {
     // 更改歌曲进度
     changeTime(percent) {
       let newCurTime = this.musicDuration * (percent * 0.01);
-      this.$store.commit("setChangeTime", newCurTime);
+      this.$store.commit("play/setChangeTime", newCurTime);
     },
     goBack(index) {
       this.$router.go(index);
     },
     toPlay(id) {
-      this.$router.push({
-        path: "/player/",
-        query: {
-          id
-        }
-      });
-      this.$store.commit("play/setCurMusicId", id);
-      this.getSongDetail();
+      if (id && id !== this.curMusicId) {
+        this.$router.replace({
+          path: "/player/" + id
+        });
+        this.$store.commit("play/setCurMusicId", id);
+        this.getSongDetail(id);
+      }
     },
     // 上一首
     prev() {
       if (this.musicListIndex !== -1 && this.curSongsList.length > 1) {
         if (this.musicListIndex > 0) {
           this.$store.commit("play/setMusicListIndex", this.musicListIndex - 1);
+
           this.toPlay(this.curSongsList[this.musicListIndex].id);
         } else {
           this.$store.commit(
