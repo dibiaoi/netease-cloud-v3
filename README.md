@@ -36,19 +36,19 @@ npm run dev
 
 ## 部分截图
 
-<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222190251625.png" alt="image-20220222190251625" style="zoom: 67%;" />
+<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222190251625.png" alt="image-20220222190251625" style="zoom: 67%;" />
 
-<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192528846.png" alt="image-20220222192528846" style="zoom: 80%;" />
+<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192528846.png" alt="image-20220222192528846" style="zoom: 80%;" />
 
-<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192632868.png" alt="image-20220222192632868" style="zoom:80%;" />
+<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192632868.png" alt="image-20220222192632868" style="zoom:80%;" />
 
-<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192655830.png" alt="image-20220222192655830" style="zoom:80%;" />
+<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192655830.png" alt="image-20220222192655830" style="zoom:80%;" />
 
-<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192733614.png" alt="image-20220222192733614" style="zoom: 80%;" />
+<img src="E:\网易云音乐项目\项目截图\image-20220222192733614.png" alt="image-20220222192733614" style="zoom: 80%;" />
 
 ## 项目布局
 
-```bash
+```
 .src
 +-- api
 |   +-- api.js // 存api
