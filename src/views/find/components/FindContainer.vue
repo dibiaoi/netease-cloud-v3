@@ -4,19 +4,23 @@
     <Icons></Icons>
     <div class="content-list">
       <HorizontalList
-        v-for="(item, index) in contentList"
-        :key="index"
-        :headline="item.headline"
-        :infoList="item.infoList"
-        :type="item.type"
+        :headline="'最新音乐'"
+        :infoList="contentList[0].infoList"
+        :type="contentList[0].type"
       ></HorizontalList>
+      <SquareList
+        :headline="'热门推荐'"
+        :infoList="contentList[1].infoList"
+        :type="contentList[1].type"
+      ></SquareList>
     </div>
   </div>
 </template>
 
 <script>
-import HorizontalList from "@/components/base/horizontal-list.vue";
-import swiper from "@/components/base/swiper.vue";
+import HorizontalList from "@/components/find/horizontal-list.vue";
+import swiper from "@/components/find/swiper.vue";
+import SquareList from "@/components/find/square-list.vue";
 import Icons from "@/components/base/icons.vue";
 export default {
   data() {
@@ -27,7 +31,8 @@ export default {
   components: {
     Swiper: swiper,
     Icons,
-    HorizontalList
+    HorizontalList,
+    SquareList
   },
   created() {
     this.recommendSongs();
@@ -35,19 +40,46 @@ export default {
   },
   methods: {
     recommendSongs() {
-      let limit = 5;
-      this.$api.personalizedFn(limit).then(
+      let limit = 9;
+      // this.$api.personalizedFn(limit).then(
+      //   res => {
+      //     let { code, result } = res.data;
+      //     if (code == 200) {
+      //       let item = {
+      //         headline: result[0].copywriter,
+      //         infoList: result,
+      //         type: "songs"
+      //       };
+      //       console.log(result);
+      //       this.contentList.push(item);
+      //     }
+      //   },
+      //   err => {
+      //     console.log(err);
+      //   }
+      // );
+
+      let arr = [
+        this.$api.personalizedNewSongFn(limit),
+        this.$api.personalizedFn(limit)
+      ];
+      Promise.all(arr).then(
         res => {
-          let { code, result } = res.data;
-          if (code == 200) {
-            let item = {
-              headline: result[0].copywriter,
-              infoList: result,
-              type: "songs"
-            };
-            console.log(result);
-            this.contentList.push(item);
+          for (const item of res) {
+            console.log("data", item.data);
+            let { code, result } = item.data;
+            // console.log('result',result)
+            if (code == 200) {
+              let item = {
+                headline: result[0].copywriter,
+                infoList: result,
+                type: "songs"
+              };
+              console.log(result);
+              this.contentList.push(item);
+            }
           }
+          console.log("contentList", this.contentList);
         },
         err => {
           console.log(err);

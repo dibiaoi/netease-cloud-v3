@@ -54,12 +54,14 @@
     <div class="header">
       <Songs-List-Body :playListDetails="playListDetails"></Songs-List-Body>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import { songListIcon } from "@/assets/js/icon";
+import Footer from "@/components/base/TheFooter.vue";
 import TheIcon from "@/components/base/TheIcon.vue";
 import songsListBody from "@/components/base/songsListBody.vue";
 export default {
@@ -102,7 +104,8 @@ export default {
   mounted() {},
   components: {
     "the-icon": TheIcon,
-    "Songs-List-Body": songsListBody
+    "Songs-List-Body": songsListBody,
+    Footer
   }
 };
 </script>

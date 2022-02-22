@@ -10,6 +10,7 @@ import {
   homepageDragonBall,
   relatedPlaylist,
   personalized,
+  personalizedNewSong,
   timelineRecommend,
   captcha,
   playlistDetail,
@@ -67,6 +68,15 @@ export default {
    */
   personalizedFn(limit) {
     return axios.get(personalized, {
+      params: { limit }
+    });
+  },
+  /**
+   * 推荐新音乐
+   *@param {number} limit : 歌单数
+   */
+  personalizedNewSongFn(limit) {
+    return axios.get(personalizedNewSong, {
       params: { limit }
     });
   },

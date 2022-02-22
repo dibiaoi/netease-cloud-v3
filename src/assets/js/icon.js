@@ -158,7 +158,7 @@ export const nameList = [
   {
     name: "发现",
     icon: "#icon-wangyiyunyinle",
-    path: "/",
+    path: "/find",
   },
   {
     name: "视频",
