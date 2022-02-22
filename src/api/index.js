@@ -17,7 +17,7 @@ import {
   songURL,
   songDetail,
   getLyric
-} from "@/api/config.js";
+} from "@/api/apis.js";
 
 const token = localStorage.getItem("UserToken");
 axios.interceptors.request.use(

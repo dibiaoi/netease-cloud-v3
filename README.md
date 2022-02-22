@@ -1,5 +1,7 @@
 # 仿网易云音乐移动端
 
+
+
 ## 技术栈
 
 - Vue
@@ -34,5 +36,61 @@ npm run dev
 
 ## 部分截图
 
+<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222190251625.png" alt="image-20220222190251625" style="zoom: 67%;" />
+
+<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192528846.png" alt="image-20220222192528846" style="zoom: 80%;" />
+
+<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192632868.png" alt="image-20220222192632868" style="zoom:80%;" />
+
+<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192655830.png" alt="image-20220222192655830" style="zoom:80%;" />
+
+<img src="C:\Users\86155\AppData\Roaming\Typora\typora-user-images\image-20220222192733614.png" alt="image-20220222192733614" style="zoom: 80%;" />
+
 ## 项目布局
+
+```bash
+.src
++-- api
+|   +-- api.js // 存api
+|   +-- index.js // api请求方法
++-- assets
+|   +-- img // 图片资源
+|   +-- js // iconfont资源
+|   +-- styles //样式
+|   +-- country_tel_list.js //国家列表
++-- components // 小组件
+|   +-- base  //  公用基础组件
+|   +-- find // 发现页模块组件  
++-- plugins // 一些工具
+|   +-- vant.js // 局部引入vant
++-- pages // 项目路由页面
++-- router // 路由配置
+|   +-- modules //路由子模块
+|   	+-- userRouters.js //用户router
+|   +-- index
++-- store // vuex 配置使用
+|   +-- user // 用户模块
+|   	+-- userInfo.js 
+|   +-- index // 组装模块并导出
+|   +-- permissionMethods.js // 路由权限的一些方法
+|   +-- play.js // 音乐播放的一些方法
++-- views // 视图  
+|   +-- base
+|   	+-- player.vue
+|   	+-- songsList.vue
+|   +-- find
+|   	+-- components
+|   		+-- FindContainer.vue
+|   	+-- find.vue
+|   +-- login
+|   	+-- login.vue
+|   	+-- loginPhoneNum.vue
+|   +-- user
+|   +-- 404.vue
++-- App.vue
++-- main.js
++-- permission.js //路由权限
+```
+
+
 

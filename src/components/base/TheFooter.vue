@@ -13,7 +13,7 @@
             <use :xlink:href="item.icon" />
           </svg>
         </span>
-        <span>{{ item.name }}</span>
+        <span class="li-span">{{ item.name }}</span>
       </li>
     </ul>
   </div>
@@ -69,7 +69,9 @@ export default {
   font-size: 8px;
   color: #959595;
 }
-
+.item-page li .li-span{
+  padding: 5px 0;
+}
 .active-page {
   color: #d73e39 !important;
 }

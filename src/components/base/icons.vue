@@ -55,7 +55,7 @@ export default {
   background-color: #e6463a;
   border-radius: 50%;
 }
-.icon-txt{
+.icon-txt {
   font-size: 0.2rem;
 }
 </style>
