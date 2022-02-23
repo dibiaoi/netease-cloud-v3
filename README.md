@@ -1,6 +1,8 @@
 # 仿网易云音乐移动端
 
+闲暇时的练手项目。
 
+因为接口稳定，准备长期慢慢完善，目前实现功能不多。
 
 ## 技术栈
 
@@ -8,6 +10,7 @@
 - Vuex
 - Vue-Router
 - WebPack4.7
+- Axios
 - Vant UI
 
 ## 后端接口
@@ -36,15 +39,15 @@ npm run dev
 
 ## 部分截图
 
-<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222190251625.png" alt="image-20220222190251625" style="zoom: 67%;" />
+![](https://github.com/dibiaoi/Imgs/raw/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222190251625.png)
 
-<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192528846.png" alt="image-20220222192528846" style="zoom: 80%;" />
+![](https://github.com/dibiaoi/Imgs/raw/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192528846.png)
 
-<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192632868.png" alt="image-20220222192632868" style="zoom:80%;" />
+![](https://github.com/dibiaoi/Imgs/raw/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192632868.png)
 
-<img src="https://github.com/dibiaoi/Imgs/blob/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192655830.png" alt="image-20220222192655830" style="zoom:80%;" />
+![](https://github.com/dibiaoi/Imgs/raw/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192655830.png)
 
-<img src="E:\网易云音乐项目\项目截图\image-20220222192733614.png" alt="image-20220222192733614" style="zoom: 80%;" />
+![](https://github.com/dibiaoi/Imgs/raw/main/%E7%BD%91%E6%98%93%E4%BA%91%E9%9F%B3%E4%B9%90%E7%A7%BB%E5%8A%A8%E7%AB%AF/image-20220222192733614.png)
 
 ## 项目布局
 
