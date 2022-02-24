@@ -30,7 +30,7 @@
     </div>
     <div class="login-pre-content">
       <button class="login-link-btn" @click="go('/login-phone')">
-        <span>登录</span>
+        <span >登录</span>
       </button>
       <div class="direct-use-btn" @click="go('/find')">
         <span>立即体验</span>

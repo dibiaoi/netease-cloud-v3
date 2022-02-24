@@ -89,7 +89,7 @@
           </svg>
         </div>
         <!--上一首-->
-        <div @click="prev()">
+        <div v-throttle="prev">
           <svg class="icon-iconfont" aria-hidden="true">
             <use xlink:href="#icon-shangyishou"></use>
           </svg>
@@ -101,7 +101,7 @@
           </svg>
         </div>
         <!--下一首-->
-        <div @click="next">
+        <div v-throttle="next">
           <svg class="icon-iconfont" aria-hidden="true">
             <use xlink:href="#icon-xiayishouxianxing"></use>
           </svg>
@@ -201,6 +201,7 @@ export default {
   methods: {
     // 控制音乐播放/暂停
     togglePlay() {
+      console.log("jieliu");
       if (this.isPlay) {
         this.$store.commit("play/setIsPlay", false);
       } else {

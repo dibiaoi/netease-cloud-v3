@@ -10,7 +10,7 @@
       class="block"
       v-for="songs in infoList"
       :key="songs.id"
-      @click="turnToRouter(songs)"
+      v-throttle="turnToRouter(songs)"
     >
       <!-- 上下结构 -->
       <div class="front">
@@ -31,6 +31,8 @@
 export default {
   data() {
     return {};
+  },
+  directives: {
   },
   props: ["infoList", "rangeType"],
   created() {

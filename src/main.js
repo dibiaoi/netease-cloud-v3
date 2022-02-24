@@ -16,6 +16,9 @@ import "@/assets/js/iconfont.js";
 import "@/assets/js/iconfont1.js";
 import "@/assets/js/iconfont2.js";
 
+import throttle from "@/plugins/throttle.js";
+Vue.directive("throttle", throttle);
+
 Vue.config.productionTip = false;
 
 Vue.prototype.$md5 = MD5Encrypt;
@@ -23,16 +26,17 @@ Vue.prototype.$axios = axios;
 Vue.prototype.$store = store;
 Vue.prototype.$api = api;
 
-//浅做些修改
+
 router.beforeEach((to, from, next) => {
-    if (to.meta.title) {
-        document.title = to.meta.title;
-    }
-    next();
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
 });
 
+
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");
