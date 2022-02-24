@@ -2,6 +2,10 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import userRoutes from "@/router/modules/userRouters.js";
+import findRouters from "@/router/modules/find.js";
+import blogRoutes from "@/router/modules/blog.js";
+import friendsRoutes from "@/router/modules/friends.js";
+import cloudVillageRouters from "@/router/modules/cloudVillage.js";
 
 Vue.use(Router);
 
@@ -11,58 +15,53 @@ Router.prototype.push = function push(location) {
 };
 
 export const constantRouterMap = [
-         {
-           path: "/",
-           redirect: "/login"
-         },
-         {
-           path: "/find",
-           name: "find",
-           meta: {
-             title: "发现页"
-           },
-           component: () => import("@/views/find/find.vue")
-         },
-         {
-           path: "/login",
-           name: "login",
-           meta: {
-             title: "登录"
-           },
-           component: () => import("@/views/login/login.vue")
-         },
-         {
-           path: "/login-phone",
-           name: "login-phone",
-           meta: {
-             title: "手机号登录"
-           },
-           component: () => import("@/views/login/loginPhoneNum.vue")
-         },
-         {
-           path: "/songsList",
-           name: "songsList",
-           props: router => ({
-             playlistId: router.query.playlistId
-           }),
-           meta: {
-             title: "歌单详情页"
-           },
-           component: () => import("@/views/base/songsList.vue")
-         },
-         {
-           path: "/player/:id",
-           name: "player",
-           // props: router => ({
-           //   id: router.query.id
-           // }),
-           meta: {
-             title: "播放页"
-           },
-           component: () => import("@/views/base/player.vue")
-         }
-       ];
+  {
+    path: "/",
+    redirect: "/login"
+  },
 
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+      title: "登录"
+    },
+    component: () => import("@/views/login/login.vue")
+  },
+  {
+    path: "/login-phone",
+    name: "login-phone",
+    meta: {
+      title: "手机号登录"
+    },
+    component: () => import("@/views/login/loginPhoneNum.vue")
+  },
+  {
+    path: "/user",
+    name: "user",
+    meta: {
+      title: "我的"
+    },
+    component: () => import("@/views/user/userIndex.vue")
+  },
+  {
+    path: "/player/:id",
+    name: "player",
+    // props: router => ({
+    //   id: router.query.id
+    // }),
+    meta: {
+      title: "播放页"
+    },
+    component: () => import("@/views/base/player.vue")
+  },
+  ...findRouters,
+  ...cloudVillageRouters,
+  ...blogRoutes,
+  ...friendsRoutes
+];
+
+// 当用户登录时添加权限的页面进入路由
 export const asyncRouterMap = [...userRoutes];
 
 const router = new Router({

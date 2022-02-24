@@ -155,32 +155,32 @@ export const setList = [
 
 // footer
 export const nameList = [
-  {
-    name: "发现",
-    icon: "#icon-wangyiyunyinle",
-    path: "/find",
-  },
-  {
-    name: "视频",
-    icon: "#icon-shiping",
-    path: "/the-video",
-  },
-  {
-    name: "我的",
-    icon: "#icon-yinyue",
-    path: "/user",
-  },
-  {
-    name: "云村",
-    icon: "#icon-pengyou",
-    path: "/friends",
-  },
-  {
-    name: "账号",
-    icon: "#icon-zhanghaoguanli",
-    path: "/the-setting",
-  },
-]
+         {
+           name: "发现",
+           icon: "#icon-wangyiyunyinle",
+           path: "/find"
+         },
+         {
+           name: "播客",
+           icon: "#icon-shiping",
+           path: "/blog"
+         },
+         {
+           name: "我的",
+           icon: "#icon-zhanghaoguanli",
+           path: "/user"
+         },
+         {
+           name: "关注",
+           icon: "#icon-pengyou",
+           path: "/friends"
+         },
+         {
+           name: "云村",
+           icon: "#icon-yinyue",
+           path: "/cloud-village"
+         }
+       ];
 
 export const songListIcon = [
   {

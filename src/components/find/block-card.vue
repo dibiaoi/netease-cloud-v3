@@ -10,7 +10,7 @@
       class="block"
       v-for="songs in infoList"
       :key="songs.id"
-      v-throttle="turnToRouter(songs)"
+      @click="turnToRouter(songs)"
     >
       <!-- 上下结构 -->
       <div class="front">

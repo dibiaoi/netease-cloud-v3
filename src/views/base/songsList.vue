@@ -23,7 +23,7 @@
           <use xlink:href="#icon-gengduoxiao" />
         </svg>
       </div>
-      <router-link :to="{ name: 'player' }">
+      <router-link :to="{ path: '/player/'+curMusicId }">
         <!-- 右上固定的当前播放歌曲 -->
         <img src="@/assets/img/music.png" class="musicIcon" />
       </router-link>

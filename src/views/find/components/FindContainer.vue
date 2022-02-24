@@ -2,7 +2,7 @@
   <div>
     <Swiper></Swiper>
     <Icons></Icons>
-    <div class="content-list">
+    <div class="content-list" v-if="showCards">
       <HorizontalList
         :headline="'最新音乐'"
         :infoList="contentList[0].infoList"
@@ -25,6 +25,7 @@ import Icons from "@/components/base/icons.vue";
 export default {
   data() {
     return {
+      showCards: false, //当获取到infoList时显示
       contentList: []
     };
   },
@@ -41,24 +42,6 @@ export default {
   methods: {
     recommendSongs() {
       let limit = 9;
-      // this.$api.personalizedFn(limit).then(
-      //   res => {
-      //     let { code, result } = res.data;
-      //     if (code == 200) {
-      //       let item = {
-      //         headline: result[0].copywriter,
-      //         infoList: result,
-      //         type: "songs"
-      //       };
-      //       console.log(result);
-      //       this.contentList.push(item);
-      //     }
-      //   },
-      //   err => {
-      //     console.log(err);
-      //   }
-      // );
-
       let arr = [
         this.$api.personalizedNewSongFn(limit),
         this.$api.personalizedFn(limit)
@@ -75,8 +58,9 @@ export default {
                 infoList: result,
                 type: "songs"
               };
-              console.log(result);
+              // console.log(result);
               this.contentList.push(item);
+              this.showCards = true;
             }
           }
           console.log("contentList", this.contentList);

@@ -1,11 +1,8 @@
-const userRoutes = [
+const cloudVillageRouters = [
   {
-    path: "/user-some",
-    name: "user",
-    meta: {
-      role: ["user"]
-    },
-    component: () => import("@/views/user/userIndex.vue"),
+    path: "/cloud-village",
+    name: "cloud-village",
+    component: () => import("@/views/cloud-village/cloudVillageIndex.vue"),
     children: [
       // {
       //   path: "/user",
@@ -19,4 +16,4 @@ const userRoutes = [
   }
 ];
 
-export default userRoutes;
+export default cloudVillageRouters;

@@ -201,7 +201,6 @@ export default {
   methods: {
     // 控制音乐播放/暂停
     togglePlay() {
-      console.log("jieliu");
       if (this.isPlay) {
         this.$store.commit("play/setIsPlay", false);
       } else {

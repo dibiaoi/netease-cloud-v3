@@ -1,11 +1,8 @@
-const userRoutes = [
+const friendsRouters = [
   {
-    path: "/user-some",
-    name: "user",
-    meta: {
-      role: ["user"]
-    },
-    component: () => import("@/views/user/userIndex.vue"),
+    path: "/friends",
+    name: "friends",
+    component: () => import("@/views/friends/friendsIndex.vue"),
     children: [
       // {
       //   path: "/user",
@@ -19,4 +16,4 @@ const userRoutes = [
   }
 ];
 
-export default userRoutes;
+export default friendsRouters;
