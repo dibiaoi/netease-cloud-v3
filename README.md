@@ -9,7 +9,7 @@
 - Vue
 - Vuex
 - Vue-Router
-- WebPack4.7
+- WebPack5
 - Axios
 - Vant UI
 

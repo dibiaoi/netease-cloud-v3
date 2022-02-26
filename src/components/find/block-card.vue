@@ -32,12 +32,9 @@ export default {
   data() {
     return {};
   },
-  directives: {
-  },
+  directives: {},
   props: ["infoList", "rangeType"],
-  created() {
-    console.log(this.rangeType);
-  },
+  created() {},
   methods: {
     numberConversion(value) {
       const newValue = ["", "", ""];
